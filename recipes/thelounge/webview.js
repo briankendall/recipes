@@ -83,4 +83,9 @@ module.exports = Ferdi => {
   };
 
   Ferdi.loop(getMessages);
+
+  // We need to monkey patch ServierWorker.postMessage so that notifications
+  // will work, and that needs to be done without context isolation:
+  const path = require('path');
+  Ferdi.injectJSUnsafe(path.join(__dirname, 'webview-unsafe.js'));
 };
