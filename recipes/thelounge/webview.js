@@ -40,6 +40,7 @@ module.exports = Ferdi => {
     var directElements = document.querySelectorAll('.badge.highlight');
 
     for (const directElement of directElements) {
+      // Note: muted channels don't have highlighted badges
       if (directElement.textContent.length > 0) {
         direct += Ferdi.safeParseInt(directElement.textContent);
       }
@@ -50,6 +51,11 @@ module.exports = Ferdi => {
       '.badge:not(.highlight)',
     );
     for (const indirectElement of indirectElements) {
+      if (indirectElement.parentElement.classList.contains('is-muted')) {
+        // Ignore muted channels
+        continue;
+      }
+
       if (indirectElement.textContent.length > 0) {
         indirect++;
       }
