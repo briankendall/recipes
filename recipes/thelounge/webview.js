@@ -51,7 +51,9 @@ module.exports = Ferdi => {
       '.badge:not(.highlight)',
     );
     for (const indirectElement of indirectElements) {
-      if (indirectElement.parentElement.classList.contains('is-muted')) {
+      const channelListItem = indirectElement.closest('.channel-list-item');
+      
+      if (channelListItem === null || channelListItem.classList.contains('is-muted')) {
         // Ignore muted channels
         continue;
       }
